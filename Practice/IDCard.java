@@ -21,11 +21,13 @@ public class IDCard extends Card
         idNumber = id;
     }
     
-    public boolean equals(Card other)
+    public boolean equals(Object otherObject)
     {
-        if(this.toString().equals(other.toString()))
+        if(this.getClass() == otherObject.getClass())
         {
-            return true;
+            IDCard other = (IDCard) otherObject;
+            return this.getName().equals(other.getName())
+                && this.idNumber.equals(other.idNumber);
         }
         
         return false;

@@ -23,11 +23,12 @@ public class Card
         return false;
     }
     
-    public boolean equals(Card other)
+    public boolean equals(Object otherObject)
     {
-        if(this.toString().equals(other.toString()))
+        if(this.getClass() == otherObject.getClass())
         {
-            return true;
+            Card other = (Card) otherObject;
+            return this.name.equals(other.name);
         }
         
         return false;
