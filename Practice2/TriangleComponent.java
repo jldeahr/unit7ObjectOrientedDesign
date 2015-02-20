@@ -12,7 +12,7 @@ class TriangleComponent extends JComponent
     private static final int FRAME_WIDTH = 200;
     private static final int FRAME_HEIGHT = 100;
     private JFrame frame;
-    private JComponent scene;
+    public int[] record;
     
     public TriangleComponent()
     {        
@@ -20,24 +20,42 @@ class TriangleComponent extends JComponent
         
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.add(this);
+        
+        MouseListener listener = new TriangleMouseListener();
+        this.addMouseListener(listener);
         frame.setVisible(true);
     }
     
-    public void paintComponent(Graphics g)
-    {
-        Graphics2D g2 = (Graphics2D) g;
-        
-        Triangle triangle = new Triangle();
-        
-        
-    }
+//     public void paintComponent(Graphics2D g)
+//     {
+//         Graphics2D g2 = (Graphics2D) g;
+//         
+//         Triangle triangle = new Triangle(record[]);
+//         
+//         
+//     }
     
-    class TriangleMouseListener
+    class TriangleMouseListener implements MouseListener
     {
         public void mouseClicked(MouseEvent event)
         {
             int x = event.getX();
             int y = event.getY();
+            
+            for (int i = 0; i < 6; i++)
+            {
+                if (i%2 == 0)
+                {
+                    record[i] = y;
+                }
+                else
+                {
+                    record[i] = x;
+                }
+            }
+            
             
             repaint();
         }
@@ -45,16 +63,6 @@ class TriangleComponent extends JComponent
         public void mouseReleased(MouseEvent event) {}
         public void mouseEntered(MouseEvent event) {}
         public void mouseExited(MouseEvent event) {}
-    }
-    
-    public void frame()
-    {
-        scene = new JComponent();
-        add(scene);
-        
-        MouseListener listener = new MousePressListener();
-        scene.addMouseListener(listener);
-        
-        setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        public void mousePressed(MouseEvent event) {}
     }
 }

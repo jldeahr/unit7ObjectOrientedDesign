@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JComponent;
 import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
+import java.awt.Graphics2D;
 
 /**
  * Write a description of class Triangle here.
@@ -14,16 +14,26 @@ import java.awt.geom.Point2D;
  */
 public class Triangle
 {
-    private Point2D.Double point1, point2, point3;
     private Line2D.Double line1, line2, line3;
+    private int[] record;
 
-    public Triangle()
+    public Triangle(int[] record)
     {
-        point1 = new Point2D.Double(0,0);
-        point2 = new Point2D.Double(0,0);
-        point3 = new Point2D.Double(0,0);
-        line1 = new Line2D.Double(0,0,0,0);
-        line2 = new Line2D.Double(0,0,0,0);
-        line3 = new Line2D.Double(0,0,0,0);
+        for (int i = 0; i < record.length; i++)
+        {
+            record[i] = record[i];
+        }
+    }
+    
+    public void draw(Graphics2D g2)
+    {
+        line1 = new Line2D.Double(record[0],record[2],record[1],record[3]);
+        line2 = new Line2D.Double(record[2],record[4],record[3],record[5]);
+        line3 = new Line2D.Double(record[4],record[0],record[5],record[1]);
+        
+        g2.draw(line1);
+        g2.draw(line2);
+        g2.draw(line3);
+        
     }
 }
