@@ -19,8 +19,6 @@ public class Deck {
      * The next card to be dealt is at size - 1.
      */
     private int size;
-    
-    private Card card;
 
     /**
      * Creates a new <code>Deck</code> instance.<BR>
@@ -32,6 +30,7 @@ public class Deck {
      */
     public Deck(String[] ranks, String[] suits, int[] values) 
     {
+        cards = new ArrayList<Card>();
         for (int i = 0; i < ranks.length; i++)
         {
             for (String suitString : suits)
@@ -41,6 +40,7 @@ public class Deck {
         }
         
         size = cards.size();
+        shuffle();
     }
 
     /**
@@ -77,9 +77,13 @@ public class Deck {
      */
     public Card deal() 
     {
-        card = cards.get(size - 1);
-        size--;
-        return card || null;
+        if (isEmpty())
+        {
+			return null;
+		}
+		size--;
+		Card card = cards.get(size);
+		return card;
     }
 
     /**
