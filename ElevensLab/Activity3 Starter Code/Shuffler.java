@@ -54,13 +54,13 @@ public class Shuffler {
      */
     public static void perfectShuffle(int[] values)
     {
-        int length = values.length - 1;
-        int[] half1 = new int[(length + 1) / 2];
-        int[] half2 = new int[(length + 1) / 2];
-        int[] shuffled = new int[length + 1];
-        for (int i = 0; i < length; i++)
+        int length = values.length;
+        int[] half1 = new int[length / 2 + 1];
+        int[] half2 = new int[length / 2 + 1];
+        int[] shuffled = new int[length];
+        for (int i = 0; i < length - 1; i++)
         {
-            if (i < length / 2)
+            if (i < (length - 1) / 2)
             {
                 half1[i] = values[i];
             }
@@ -69,7 +69,7 @@ public class Shuffler {
                 half2[i] = values[i];
             }
         }
-        for (int j = 0; j < length; j++)
+        for (int j = 0; j < length - 1; j++)
         {
             if (j % 2 == 0)
             {
@@ -77,7 +77,7 @@ public class Shuffler {
             }
             else
             {
-                shuffled[j] = half2[j];
+                shuffled[j] = half2[j-1];
             }
         }
     }
@@ -95,14 +95,13 @@ public class Shuffler {
      */
     public static void selectionShuffle(int[] values)
     {
-        length = values.length;
-        int shuffled = new int[length];
+        int length = values.length;
+        int[] shuffled = new int[length];
+        int rand = (int)Math.random() * length + 1;
         for (int i = length - 1; i > 0; i--)
         {
-            int rand = (int)Math.random() * length + 1;
             int store = values[i];
             shuffled[rand] = store;
-            
         }
     }
 }
