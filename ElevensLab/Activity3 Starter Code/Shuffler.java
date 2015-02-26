@@ -57,7 +57,6 @@ public class Shuffler {
         int length = values.length;
         int[] half1 = new int[length / 2 + 1];
         int[] half2 = new int[length / 2 + 1];
-        int[] shuffled = new int[length];
         for (int i = 0; i < length - 1; i++)
         {
             if (i < (length - 1) / 2)
@@ -71,14 +70,8 @@ public class Shuffler {
         }
         for (int j = 0; j < length - 1; j++)
         {
-            if (j % 2 == 0)
-            {
-                shuffled[j] = half1[j];
-            }
-            else
-            {
-                shuffled[j] = half2[j-1];
-            }
+            values[j] = half1[j];
+            values[j + 1] = half2[j];
         }
     }
 
@@ -96,12 +89,11 @@ public class Shuffler {
     public static void selectionShuffle(int[] values)
     {
         int length = values.length;
-        int[] shuffled = new int[length];
         int rand = (int)Math.random() * length + 1;
         for (int i = length - 1; i > 0; i--)
         {
             int store = values[i];
-            shuffled[rand] = store;
+            values[rand] = store;
         }
     }
 }
