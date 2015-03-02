@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  * This class provides a convenient way to test shuffling methods.
  */
@@ -17,7 +18,7 @@ public class Shuffler {
     {
         System.out.println("Results of " + SHUFFLE_COUNT +
             " consecutive perfect shuffles:");
-        int[] values1 = {0, 1, 2, 3};
+        int[] values1 = {0, 1, 2, 3, 4, 5};
         for (int j = 1; j <= SHUFFLE_COUNT; j++)
         {
             perfectShuffle(values1);
@@ -32,7 +33,7 @@ public class Shuffler {
 
         System.out.println("Results of " + SHUFFLE_COUNT +
             " consecutive efficient selection shuffles:");
-        int[] values2 = {0, 1, 2, 3};
+        int[] values2 = {0, 1, 2, 3, 4, 5};
         for (int j = 1; j <= SHUFFLE_COUNT; j++)
         {
             selectionShuffle(values2);
@@ -55,23 +56,23 @@ public class Shuffler {
     public static void perfectShuffle(int[] values)
     {
         int length = values.length;
-        int[] half1 = new int[length / 2 + 1];
-        int[] half2 = new int[length / 2 + 1];
-        for (int i = 0; i < length - 1; i++)
+        int[] shuffled = new int[length];
+        int k = 0;
+        for (int j = 0; j < (length) / 2; j++)
         {
-            if (i < (length - 1) / 2)
-            {
-                half1[i] = values[i];
-            }
-            else
-            {
-                half2[i] = values[i];
-            }
+            shuffled[k] = values[j];
+            k += 2;
         }
-        for (int j = 0; j < length - 1; j++)
+        k = 1;
+        for (int j = length / 2; j < length; j++)
         {
-            values[j] = half1[j];
-            values[j + 1] = half2[j];
+            shuffled[k] = values[j];
+            k += 2;
+        }
+        
+        for (int i = 0; i < length; i++)
+        {
+            values[i] = shuffled[i];
         }
     }
 
@@ -89,11 +90,14 @@ public class Shuffler {
     public static void selectionShuffle(int[] values)
     {
         int length = values.length;
-        int rand = (int)Math.random() * length + 1;
-        for (int i = length - 1; i > 0; i--)
+        int temp;
+        Random gen = new Random();
+        for (int k = 1; k < length; k++)
         {
-            int store = values[i];
-            values[rand] = store;
+            int j = gen.nextInt(k);
+            temp = values[j];
+            values[j] = values[k];
+            values[k] = temp;
         }
     }
 }
