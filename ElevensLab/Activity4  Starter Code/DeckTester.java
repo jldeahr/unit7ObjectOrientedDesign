@@ -10,7 +10,7 @@ public class DeckTester {
     public static void main(String[] args) {
         String[] ranks = {"ace", "two", "three", "four", "five", "six", "seven", "eight", 
                           "nine", "ten", "jack", "queen", "king"};
-        String[] suits = {"blue", "red"};
+        String[] suits = {"diamond", "heart", "spade", "club"};
         int[] pointValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         Deck d = new Deck(ranks, suits, pointValues);
 
@@ -51,11 +51,18 @@ public class DeckTester {
         System.out.println("  deal: " + d.deal());
         System.out.println();
         System.out.println();
-
+        
         Deck e = new Deck (ranks, suits, pointValues);
+        System.out.println("Deck before shuffle:");
+        System.out.println(e.toString());
+        System.out.println("Shuffle Test:");
+        System.out.println("Shuffle 1:");
         e.shuffle();
-        e.toString();
+        System.out.println("Result of Shuffle 1:");
+        System.out.println(e.toString());
+        System.out.println("Shuffle 2:");
         e.shuffle();
-        e.toString();
+        System.out.println("Result of Shuffle 2:");
+        System.out.println(e.toString());
     }
 }
